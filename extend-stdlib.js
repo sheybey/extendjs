@@ -7,6 +7,9 @@
     style, textContent, toUpperCase, value
 */
 
+// Copyright (c) 2016 Sam Heybey.
+// See https://github.com/sheybey/extendjs/blob/master/LICENSE for details.
+
 (function () {
     "use strict";
     extend.add("attr", function (attribute, value) {

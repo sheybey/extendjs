@@ -3,6 +3,9 @@
     add, apply, element, isPrototypeOf, prototype, create, createElement
 */
 
+// Copyright (c) 2016 Sam Heybey.
+// See https://github.com/sheybey/extendjs/blob/master/LICENSE for details.
+
 var extend = (function () {
     "use strict";
     var Wrapper = function (element) {
