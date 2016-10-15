@@ -4,7 +4,7 @@ This is a library designed to allow easy extension of DOM objects that you
 shouldn't be touching the prototype of. Just register a method using
 `extend.add(name, callable)` and extend away.
 
-No relation to extendjs.com. The name will be changed at some point.
+No relation to extendjs.org. The name will be changed at some point.
 
 ## Files
 
