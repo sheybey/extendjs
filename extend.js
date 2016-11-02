@@ -1,6 +1,6 @@
-/*jslint this, browser*/
+/*jslint this*/
 /*property
-    add, apply, element, isPrototypeOf, prototype, create, createElement
+    add, apply, isPrototypeOf, object, prototype
 */
 
 // Copyright (c) 2016 Sam Heybey.
@@ -8,18 +8,18 @@
 
 var extend = (function () {
     "use strict";
-    var Wrapper = function (element) {
-        this.element = element;
+    var Wrapper = function (object) {
+        this.object = object;
     };
-    var e = function (element) {
-        if (element === null || element === undefined) {
+    var e = function (object) {
+        if (object === null || object === undefined) {
             throw new Error("null or undefined passed to extend");
         }
 
-        if (Wrapper.prototype.isPrototypeOf(element)) {
-            return element;
+        if (Wrapper.prototype.isPrototypeOf(object)) {
+            return object;
         }
-        return new Wrapper(element);
+        return new Wrapper(object);
     };
 
     e.add = function (name, callable) {
@@ -29,9 +29,6 @@ var extend = (function () {
                 ? this
                 : r;
         };
-    };
-    e.create = function (name) {
-        return e(document.createElement(name));
     };
 
     return e;

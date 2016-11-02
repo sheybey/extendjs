@@ -2,9 +2,9 @@
 /*global extend, window*/
 /*property
     add, addEventListener, append, appendChild, apply, classList, contains,
-    css, element, getAttribute, getComputedStyle, hide, innerHTML, parentNode,
-    remove, removeChild, removeEventListener, replace, setAttribute, show,
-    style, textContent, toUpperCase, value
+    create, createElement, css, getAttribute, getComputedStyle, hide,
+    innerHTML, object, parentNode, remove, removeChild, removeEventListener,
+    replace, setAttribute, show, style, textContent, toUpperCase, value
 */
 
 // Copyright (c) 2016 Sam Heybey.
@@ -12,17 +12,21 @@
 
 (function () {
     "use strict";
+    extend.create = function (name) {
+        return extend(document.createElement(name));
+    };
+
     extend.add("attr", function (attribute, value) {
         if (value === undefined) {
-            return this.element.getAttribute(attribute);
+            return this.object.getAttribute(attribute);
         }
-        this.element.setAttribute(attribute, value);
+        this.object.setAttribute(attribute, value);
     });
     extend.add("val", function (value) {
         if (value === undefined) {
-            return this.element.value;
+            return this.object.value;
         }
-        this.element.value = value;
+        this.object.value = value;
     });
     extend.add("css", function (property, value) {
         property = property.replace(
@@ -32,9 +36,9 @@
             }
         );
         if (value === undefined) {
-            return window.getComputedStyle(this.element)[property];
+            return window.getComputedStyle(this.object)[property];
         }
-        this.element.style[property] = value;
+        this.object.style[property] = value;
     });
 
     extend.add("hide", function () {
@@ -52,52 +56,52 @@
     });
 
     extend.add("addClass", function () {
-        this.element.classList.add.apply(
-            this.element.classList,
+        this.object.classList.add.apply(
+            this.object.classList,
             arguments
         );
     });
     extend.add("removeClass", function () {
-        this.element.classList.remove.apply(
-            this.element.classList,
+        this.object.classList.remove.apply(
+            this.object.classList,
             arguments
         );
     });
     extend.add("hasClass", function (name) {
-        return this.element.classList.contains(name);
+        return this.object.classList.contains(name);
     });
 
     extend.add("text", function (text) {
         if (text === undefined) {
-            return this.element.textContent;
+            return this.object.textContent;
         }
-        this.element.textContent = text;
+        this.object.textContent = text;
     });
     extend.add("html", function (html) {
         if (html === undefined) {
-            return this.element.innerHTML;
+            return this.object.innerHTML;
         }
-        this.element.innerHTML = html;
+        this.object.innerHTML = html;
     });
 
     extend.add("on", function (trigger, handler) {
-        this.element.addEventListener(trigger, handler);
+        this.object.addEventListener(trigger, handler);
     });
     extend.add("off", function (trigger, handler) {
-        this.element.removeEventListener(trigger, handler);
+        this.object.removeEventListener(trigger, handler);
     });
 
     extend.add("parent", function () {
-        return extend(this.element.parentNode);
+        return extend(this.object.parentNode);
     });
 
     extend.add("append", function (child) {
-        this.element.appendChild(extend(child).element);
+        this.object.appendChild(extend(child).object);
     });
     extend.add("appendTo", function (parent) {
         extend(parent).append(this);
     });
     extend.add("remove", function () {
-        this.element.parentNode.removeChild(this.element);
+        this.object.parentNode.removeChild(this.object);
     });
 }());
