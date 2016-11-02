@@ -23,6 +23,9 @@ var extend = (function () {
     };
 
     e.add = function (name, callable) {
+        if (name === "object") {
+            throw new Error("Can't overwrite object property");
+        }
         Wrapper.prototype[name] = function () {
             var r = callable.apply(this, arguments);
             return r === undefined
